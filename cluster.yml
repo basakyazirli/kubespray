@@ -1,10 +1,11 @@
----
 - name: Check ansible version
   import_playbook: ansible_version.yml
 
 - name: Add kube-master nodes to kube_control_plane
   # This is for old inventory which contains kube-master instead of kube_control_plane
   hosts: kube-master
+  # vars:
+  #  private_key_file: "/etc/ansible/Tycase.pem"          
   gather_facts: false
   tasks:
     - name: add nodes to kube_control_plane group
@@ -95,13 +96,13 @@
     - { role: network_plugin, tags: network }
     - { role: kubernetes/node-label, tags: node-label }
 
-- hosts: calico-rr
+- hosts: flannel
   gather_facts: False
   any_errors_fatal: "{{ any_errors_fatal | default(true) }}"
   environment: "{{ proxy_disable_env }}"
   roles:
     - { role: kubespray-defaults }
-    - { role: network_plugin/calico/rr, tags: ['network', 'calico_rr'] }
+    - { role: network_plugin/flannel, tags: ['network', 'flannel'] }
 
 - hosts: kube_control_plane[0]
   gather_facts: False
