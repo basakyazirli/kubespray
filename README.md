@@ -20,9 +20,13 @@ cp -rfp inventory/sample inventory/mycluster
 declare -a IPS=(8.208.16.47 8.208.112.61)
 CONFIG_FILE=inventory/mycluster/hosts.yaml python3 contrib/inventory_builder/inventory.py ${IPS[@]}
 
-# Review and change parameters under ``inventory/mycluster/group_vars``
-cat inventory/mycluster/group_vars/all/all.yml
-cat inventory/mycluster/group_vars/k8s-cluster/k8s-cluster.yml
+# Change cluster node role and ips
+sudo vi inventory/mycluster/group_vars/k8s-cluster/k8s-cluster.yml
+# Change cluster configuration 
+sudo vi inventory/mycluster/group_vars/all/all.yml
+
+# Check and update the playbook
+sudo vi cluster.yml
 
 # Deploy Kubespray with Ansible Playbook - run the playbook as root
 # The option `--become` is required, as for example writing SSL keys in /etc/,
