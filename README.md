@@ -23,7 +23,7 @@ CONFIG_FILE=inventory/mycluster/hosts.yaml python3 contrib/inventory_builder/inv
 # Change cluster node role and ips
 sudo vi inventory/mycluster/group_vars/k8s-cluster/k8s-cluster.yml
 # Change cluster configuration 
-sudo vi inventory/mycluster/group_vars/all/all.yml
+sudo vi inventory/mycluster/hosts.yaml
 
 # Check and update the playbook
 sudo vi cluster.yml
